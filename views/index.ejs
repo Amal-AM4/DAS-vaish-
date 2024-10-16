@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Doctor Appoiment System</title>
+
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="assets/css/index.css">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  
+
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/user/login" class="btn-show">SignIn</a>
+        </li>
+        <li>
+          <a href="/user/register" class="btn-show">Create User Account</a>
+        </li>
+        <!-- <li>
+          <a href="/emp/register" class="btn">Create Employee Account</a>
+        </li>
+        <li>
+          <a href="/emp/login" class="btn">Employee SignIn</a>
+        </li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="main">
+      <div class="parent">
+        <h1>Welcome to Doctor Appoiment System</h1>
+        <h5>Patient can booking corresponding Doctor</h5>
+        <br>
+        <h3>Search </h3>
+
+        <form action="">
+          <div class="form-control">
+            <input type="text" name="" id="" placeholder="Place/Location">
+            <select name="" id="">
+              <option value="" hidden>Medical Specialists</option>
+            </select>
+            <button>
+              <i class="bi bi-search"></i> 
+              Search
+            </button>
+          </div>
+        </form>
+
+        <br><br>
+
+        <table class="table table-borderless datatable">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Doctor Name</th>
+              <th scope="col">Specialists</th>
+              <th scope="col">Hospital Name</th>
+              <th scope="col">Availability</th>
+              <th scope="col">Location</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">#1</th>
+              <td>Nafil</td>
+              <td>Pathologists</td>
+              <td>ABC Hospital</td>
+              <td>10 seat</td>
+              <td>Attigal</td>
+              <td><a href="#">Book</a></td>
+            </tr>
+
+            <tr>
+              <th scope="row">#2</th>
+              <td>Yamuna</td>
+              <td>Plastic Surgeons</td>
+              <td>BBC Hospital</td>
+              <td>6 seat</td>
+              <td>Attigal</td>
+              <td><a href="btn btn-primary">Book</a></td>
+            </tr>
+
+
+          </tbody>
+        </table>
+
+
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Vyshnavi</span></strong>. All Rights Reserved
+    </div>
+  </footer>
+
+  
+  
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

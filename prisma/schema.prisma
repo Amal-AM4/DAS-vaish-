@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  pwd      String
+  createAt DateTime @default(now())
+}
+
+// Hospital Model
+model Hospital {
+  id           Int           @id @default(autoincrement())
+  name         String
+  place        String
+  email        String        @unique
+  phone        String        @unique
+  password     String
+  departments  Department[] // One Hospital has many Departments
+  doctors      Doctor[] // One Hospital has many Doctors
+  appointments Appointment[] // One Hospital has many Appointments <--- Add this line
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+// Department Model
+model Department {
+  id         Int      @id @default(autoincrement())
+  name       String
+  hospital   Hospital @relation(fields: [hospitalId], references: [id])
+  hospitalId Int
+  doctors    Doctor[] // One Department has many Doctors
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Doctor Model
+model Doctor {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  phone        String        @unique
+  password     String
+  isAvailable  Boolean       @default(true)
+  attendScale  Int           @default(10) // Maximum number of patients
+  hospital     Hospital      @relation(fields: [hospitalId], references: [id])
+  hospitalId   Int
+  department   Department    @relation(fields: [departmentId], references: [id])
+  departmentId Int
+  tracker      Tracker       @relation(fields: [trackerId], references: [id])
+  trackerId    Int           @unique
+  appointments Appointment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+// Tracker Model
+model Tracker {
+  id        Int      @id @default(autoincrement())
+  slots     Int      @default(10) // Available booking slots
+  doctor    Doctor?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Patient (User) Model
+model Patient {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  phone        String        @unique
+  password     String
+  appointments Appointment[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+// Appointment Model
+model Appointment {
+  id            Int      @id @default(autoincrement())
+  appointmentNo String   @unique @default(uuid())
+  status        Status   @default(PENDING)
+  patient       Patient  @relation(fields: [patientId], references: [id])
+  patientId     Int
+  doctor        Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId      Int
+  hospital      Hospital @relation(fields: [hospitalId], references: [id])
+  hospitalId    Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Enum for Appointment Status
+enum Status {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
