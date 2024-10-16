@@ -53,6 +53,67 @@ async function home(req, res) {
     }
 }
 
+async function addDepartment(req, res) {
+    try {
+        const hosData = req.hospital;
+        const pk = hosData.hospitalId;
+        
+        // Fetch employee details along with their associated job category
+        const hos = await prisma.Hospital.findUnique({
+            where: { id: pk }
+        });
+
+        const dept = await prisma.department.findMany({
+            where: {
+                hospitalId: pk
+            },
+            include: {
+                doctors: true, // This will include associated doctors if needed
+                hospital: true // This will include the hospital details
+            }
+        });
+
+        res.render('hospital/addDepartment', { data: hos, dept })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function insertDepartment(req, res) {
+    try {
+        const { name, hosId } = req.body;
+        
+        // Fetch employee details along with their associated job category
+        const hos = await prisma.Department.create({
+            data: { 
+                name: name,
+                hospitalId: parseInt(hosId),
+            }
+        });
+        console.log('Department is added');
+        
+        res.redirect('/hospital/addDepartment');
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function removeDepartment(req, res) {
+    try {
+        const { id } = req.params;
+        
+        // Fetch employee details along with their associated job category
+        const hos = await prisma.Department.delete({
+            where: { id: parseInt(id) }
+        });
+        console.log('Department is removed');
+        
+        res.redirect('/hospital/addDepartment');
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // handle emp login requests
 async function hospitalLoginProcess (req, res) {
     try {
@@ -99,5 +160,5 @@ async function hospitalLogout (req, res) {
 module.exports = {
     hospitalLogin, hospitalReg, hospitalRegData,
     hospitalLoginProcess, hospitalLogout,
-    home,
+    home, addDepartment, insertDepartment, removeDepartment,
 }

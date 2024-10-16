@@ -32,9 +32,12 @@ router.get('/hospital/login', hospitalController.hospitalLogin);
 router.get('/hospital/logout', hospitalController.hospitalLogout);
 router.get('/hospital/register', hospitalController.hospitalReg);
 router.get('/hospital/index', authHospital, hospitalController.home);
+router.get('/hospital/addDepartment', authHospital, hospitalController.addDepartment);
+router.get('/hospital/removeDept/:id', authHospital, hospitalController.removeDepartment);
 
 router.post('/hospital/register', hospitalController.hospitalRegData);
 router.post('/hospital/login', hospitalController.hospitalLoginProcess);
+router.post('/hospital/addDepartment', hospitalController.insertDepartment);
 
 // patient
 router.get('/user/login', userController.login);

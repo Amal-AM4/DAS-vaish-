@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard | Hospital</title>
+  <title>Dashboard | Department</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -42,7 +42,46 @@
   <!-- End Sidebar-->
 
   <main id="main" class="main">
-    <h1>Welcome <%= data.name %></h1>
+    <h3>Insert Medical Department</h3>
+
+    <form action="/hospital/addDepartment" method="post">
+        <div class="form-group">
+            <label for="Department">Department Name</label>
+            <input type="text" name="name" class="form-control" 
+            id="Department" aria-describedby="emailHelp" placeholder="Title/Name">
+            <small id="emailHelp" class="form-text text-muted">Only enter available deparment in your hospital.</small>
+        </div>
+
+        <input type="hidden" value="<%= data.id %>" name="hosId">
+
+        <button type="submit" class="btn btn-success mt-2">Submit</button>
+    </form>
+
+    <br>
+
+    <table class="table table-borderless datatable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Department</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% let count = 1; %>
+            <% dept.forEach(col => { %>
+                <tr>
+                    <td><%= count %></td>
+                    <td><%= col.name %></td>
+                    <td><%= new Date(col.createdAt).toLocaleDateString('en-GB') %></td> <!-- Format date to dd-mm-yyyy -->
+                    <td><a href="/hospital/removeDept/<%= col.id %>" class="btn btn-danger">Remove</a></td>
+                </tr>
+                <% count ++; %>
+            <% }) %>
+        </tbody>
+      </table>
+
 
   </main>
 
