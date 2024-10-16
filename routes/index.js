@@ -27,7 +27,7 @@ router.get('/admin/removeEmp/:id',authAdmin, adminController.removeEmp);
 router.post('/admin/login', adminController.adminLoginProcess);
 router.post('/admin/addCategory', adminController.categoryAdd);
 
-// emp
+// hospital
 router.get('/emp/login', empController.empLogin);
 router.get('/emp/logout', empController.empLogout);
 router.get('/emp/register', empController.empReg);

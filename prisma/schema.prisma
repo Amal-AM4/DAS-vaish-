@@ -48,22 +48,23 @@ model Department {
 
 // Doctor Model
 model Doctor {
-  id           Int           @id @default(autoincrement())
+  id           Int             @id @default(autoincrement())
   name         String
-  email        String        @unique
-  phone        String        @unique
+  email        String          @unique
+  phone        String          @unique
   password     String
-  isAvailable  Boolean       @default(true)
-  attendScale  Int           @default(10) // Maximum number of patients
-  hospital     Hospital      @relation(fields: [hospitalId], references: [id])
+  isAvailable  Boolean         @default(true)
+  attendScale  Int             @default(10) // Maximum number of patients
+  experience   ExperienceLevel // Field indicating experience level (Junior, Senior, Assistant)
+  hospital     Hospital        @relation(fields: [hospitalId], references: [id])
   hospitalId   Int
-  department   Department    @relation(fields: [departmentId], references: [id])
+  department   Department      @relation(fields: [departmentId], references: [id])
   departmentId Int
-  tracker      Tracker       @relation(fields: [trackerId], references: [id])
-  trackerId    Int           @unique
+  tracker      Tracker         @relation(fields: [trackerId], references: [id])
+  trackerId    Int             @unique
   appointments Appointment[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
 }
 
 // Tracker Model
@@ -107,4 +108,10 @@ enum Status {
   PENDING
   COMPLETED
   CANCELLED
+}
+
+enum ExperienceLevel {
+  JUNIOR
+  SENIOR
+  ASSISTANT
 }
