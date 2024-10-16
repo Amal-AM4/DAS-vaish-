@@ -1,12 +1,12 @@
 var express = require('express');
 const adminController = require('../controllers/adminController');
-const empController = require('../controllers/empController');
+const hospitalController = require('../controllers/hospitalController');
 const userController = require('../controllers/userController');
 
 
 const authAdmin = require('../middlewares/authAdmin');
-const authEmp = require('../middlewares/authEmp');
 const authUser = require('../middlewares/authUser');
+const authHospital = require('../middlewares/authHospital');
 
 var router = express.Router();
 
@@ -28,13 +28,13 @@ router.post('/admin/login', adminController.adminLoginProcess);
 router.post('/admin/addCategory', adminController.categoryAdd);
 
 // hospital
-router.get('/emp/login', empController.empLogin);
-router.get('/emp/logout', empController.empLogout);
-router.get('/emp/register', empController.empReg);
-router.get('/emp/index', authEmp, empController.home);
+router.get('/hospital/login', hospitalController.hospitalLogin);
+router.get('/hospital/logout', hospitalController.hospitalLogout);
+router.get('/hospital/register', hospitalController.hospitalReg);
+router.get('/hospital/index', authHospital, hospitalController.home);
 
-router.post('/emp/register', empController.empRegData);
-router.post('/emp/login', empController.empLoginProcess);
+router.post('/hospital/register', hospitalController.hospitalRegData);
+router.post('/hospital/login', hospitalController.hospitalLoginProcess);
 
 // patient
 router.get('/user/login', userController.login);
